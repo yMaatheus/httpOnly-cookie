@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 const PORT = process.env.PORT || 3001;
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
@@ -17,6 +18,7 @@ app.use(cors({
 }));
 
 app.post('/login', async (_req, res) => {
+  console.log('Login request received');
   const token = jwt.sign({ id: '10' }, JWT_SECRET);
   res.cookie('token', token, { httpOnly: true });
 
