@@ -17,10 +17,11 @@ app.use(cors({
   credentials: true,
 }));
 
-app.post('/login', async (_req, res) => {
+app.post('/login', async (req, res) => {
   console.log('Login request received');
+  console.log('Signed Cookies: ', req.signedCookies)
   const token = jwt.sign({ id: '10' }, JWT_SECRET);
-  res.cookie('token', token, { httpOnly: true });
+  res.cookie('token', token, { httpOnly: true, sameSite: 'strict' });
 
   res.status(200).json({ message: 'Login successful' });
 });
