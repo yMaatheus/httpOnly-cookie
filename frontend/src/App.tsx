@@ -12,7 +12,7 @@ function App() {
     }
 
     login();
-  })
+  }, [])
 
   return (
     <div className="card">
